@@ -71,4 +71,18 @@ class XmlTest extends TestCase
         $xmlReader = new Xml();
         $xmlReader->listWorksheetInfo('tests/data/Reader/Xml/CorruptedXmlFile.xml');
     }
+
+    /**
+     * Check if it can read XML if some namespaces are defined in root node but never used.
+     */
+    public function testNoNamespaceError(): void
+    {
+        $reader = new Xml();
+        $spreadsheet = $reader->load('tests/data/Reader/Xml/ReadNamespacesNeverUsed.xml');
+        $spreadsheet->setActiveSheetIndex(0);
+        self::assertEquals('First Column', $spreadsheet->getActiveSheet()->getCell('A1')->getValue());
+        self::assertNull($spreadsheet->getActiveSheet()->getCell('A2')->getValue());
+        self::assertEquals('Second Column', $spreadsheet->getActiveSheet()->getCell('B1')->getValue());
+        self::assertEquals('Third Column', $spreadsheet->getActiveSheet()->getCell('C1')->getValue());
+    }
 }

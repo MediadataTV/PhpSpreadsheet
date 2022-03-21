@@ -262,6 +262,8 @@ class Xml extends BaseReader
         }
 
         $namespaces = $xml->getNamespaces(true);
+        $namespacesDoc = $xml->getDocNamespaces(true);
+        $namespaces = array_merge($namespaces, $namespacesDoc);
 
         (new Properties($spreadsheet))->readProperties($xml, $namespaces);
 

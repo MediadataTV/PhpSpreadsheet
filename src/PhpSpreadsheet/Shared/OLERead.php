@@ -159,8 +159,11 @@ class OLERead
         $bbs = self::BIG_BLOCK_SIZE / 4;
         for ($i = 0; $i < $this->numBigBlockDepotBlocks; ++$i) {
             $pos = ($bigBlockDepotBlocks[$i] + 1) * self::BIG_BLOCK_SIZE;
-
-            $this->bigBlockChain .= substr($this->data, $pos, 4 * $bbs);
+            $bigBlockChainData = substr($this->data, $pos, 4 * $bbs);
+            if ($bigBlockChainData === false) {
+                throw new ReaderException('Cannot read OLE Xls File. The file is corrupted.');
+            }
+            $this->bigBlockChain .= $bigBlockChainData;
             $pos += 4 * $bbs;
         }
 

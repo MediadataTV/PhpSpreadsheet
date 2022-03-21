@@ -5470,3 +5470,9 @@ parameters:
 			count: 1
 			path: src/PhpSpreadsheet/Writer/Xlsx/Xlfn.php
 
+		-
+			message: "#^Strict comparison using \\=\\=\\= between string and false will always evaluate to false\\.$#"
+			count: 1
+			path: src/PhpSpreadsheet/Shared/OLERead.php
+
+
