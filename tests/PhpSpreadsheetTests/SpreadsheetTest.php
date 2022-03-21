@@ -26,10 +26,7 @@ class SpreadsheetTest extends TestCase
         $this->object->addSheet($sheet);
     }
 
-    /**
-     * @return array
-     */
-    public function dataProviderForSheetNames()
+    public function dataProviderForSheetNames(): array
     {
         $array = [
             [0, 'someSheet1'],
@@ -44,12 +41,9 @@ class SpreadsheetTest extends TestCase
     }
 
     /**
-     * @param $index
-     * @param $sheetName
-     *
      * @dataProvider dataProviderForSheetNames
      */
-    public function testGetSheetByName($index, $sheetName): void
+    public function testGetSheetByName(int $index, string $sheetName): void
     {
         self::assertSame($this->object->getSheet($index), $this->object->getSheetByName($sheetName));
     }

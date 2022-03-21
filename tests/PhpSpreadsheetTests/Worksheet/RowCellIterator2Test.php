@@ -25,9 +25,11 @@ class RowCellIterator2Test extends TestCase
         $lastCoordinate = '';
         $firstCoordinate = '';
         foreach ($iterator as $cell) {
-            $lastCoordinate = $cell->getCoordinate();
-            if (!$firstCoordinate) {
-                $firstCoordinate = $lastCoordinate;
+            if ($cell !== null) {
+                $lastCoordinate = $cell->getCoordinate();
+                if (!$firstCoordinate) {
+                    $firstCoordinate = $lastCoordinate;
+                }
             }
         }
         self::assertEquals($expectedResultFirst, $firstCoordinate);
@@ -53,7 +55,7 @@ class RowCellIterator2Test extends TestCase
         $sheet->getCell('B2')->setValue('cellb2');
         $sheet->getCell('F2')->setValue('cellf2');
 
-        $iterator = new RowCellIterator($sheet, '3');
+        $iterator = new RowCellIterator($sheet, 3);
         if (isset($existing)) {
             $iterator->setIterateOnlyExistingCells($existing);
         }

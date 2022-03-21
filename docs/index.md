@@ -24,7 +24,7 @@ allow you to read and write various spreadsheet file formats such as Excel and L
 
 ## Software requirements
 
-PHP version 7.2 or newer to develop using PhpSpreadsheet. Other requirements, such as PHP extensions, are enforced by
+PHP version 7.3 or newer to develop using PhpSpreadsheet. Other requirements, such as PHP extensions, are enforced by
 composer. See the `require` section of [the composer.json file](https://github.com/PHPOffice/PhpSpreadsheet/blob/master/composer.json)
 for details.
 
@@ -89,7 +89,7 @@ php vendor/phpoffice/phpspreadsheet/samples/Basic/01_Simple.php
 
 ## Learn by documentation
 
-For more in-depth documentation, you may read about an [overview of the
+For more documentation in depth, you may read about an [overview of the
 architecture](./topics/architecture.md),
 [creating a spreadsheet](./topics/creating-spreadsheet.md),
 [worksheets](./topics/worksheets.md),
