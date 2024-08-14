@@ -34,6 +34,8 @@ class OLERead
     const START_BLOCK_POS = 0x74;
     const SIZE_POS = 0x78;
 
+    const MAX_ZERO_BLOCK = 20;
+
     public $wrkbook;
 
     public $summaryInformation;
@@ -205,12 +207,18 @@ class OLERead
             $rootdata = $this->readData($this->props[$this->rootentry]['startBlock']);
 
             $block = $this->props[$stream]['startBlock'];
-
+            $blockIsZeroCounter = 0;
             while ($block != -2) {
                 $pos = $block * self::SMALL_BLOCK_SIZE;
                 $streamData .= substr($rootdata, $pos, self::SMALL_BLOCK_SIZE);
 
                 $block = self::getInt4d($this->smallBlockChain, $block * 4);
+                if($block===0){
+                    $blockIsZeroCounter++;
+                }
+                if($blockIsZeroCounter >= self::MAX_ZERO_BLOCK){
+                    throw new ReaderException('Cannot read OLE Xls File. The file is corrupted.');
+                }
             }
 
             return $streamData;
